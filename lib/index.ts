@@ -1,1 +1,1 @@
-import cdk = require('@aws-cdk/core');
+export * from './iam/AllowHostedZoneChangeResourceRecordSetsPolicy'
