@@ -2,20 +2,21 @@ import { expect as expectCDK, haveResource, SynthUtils } from '@aws-cdk/assert';
 import cdk = require('@aws-cdk/core');
 import CdkConstructs = require('../lib/index');
 
-test('SQS Queue Created', () => {
-    const app = new cdk.App();
-    const stack = new cdk.Stack(app, "TestStack");
-    // WHEN
-    new CdkConstructs.CdkConstructs(stack, 'MyTestConstruct');
-    // THEN
-    expectCDK(stack).to(haveResource("AWS::SQS::Queue"));
-});
+const CDK_DEFAULT_ACCOUNT = '123'
+const CDK_DEFAULT_REGION = 'eu-central-1'
 
-test('SNS Topic Created', () => {
-  const app = new cdk.App();
-  const stack = new cdk.Stack(app, "TestStack");
+test('AllowHostedZoneChangeResourceRecordSetsPolicy created', () => {
+  const app = new cdk.App()
+  const stack = new cdk.Stack(app, 'TestStack', {
+    env: {
+      account: CDK_DEFAULT_ACCOUNT,
+      region: CDK_DEFAULT_REGION
+    }
+  })
   // WHEN
-  new CdkConstructs.CdkConstructs(stack, 'MyTestConstruct');
+  new CdkConstructs.AllowHostedZoneChangeResourceRecordSetsPolicy(stack, 'MyTestConstruct', {
+    domainName: 'mydomain.com'
+  })
   // THEN
-  expectCDK(stack).to(haveResource("AWS::SNS::Topic"));
-});
+  expectCDK(stack).to(haveResource('AWS::IAM::ManagedPolicy'))
+})
