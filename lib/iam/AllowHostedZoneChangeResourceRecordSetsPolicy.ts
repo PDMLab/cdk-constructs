@@ -7,6 +7,7 @@ export interface AllowHostedZoneChangeResourceRecordSetsPolicyProps {
    * The domain name the hosted zone has been setup for.
    *
    */
+  policyName?: string
   domainName: string
 }
 
@@ -23,7 +24,7 @@ export class AllowHostedZoneChangeResourceRecordSetsPolicy extends cdk.Construct
     })
 
     this.policy = new iam.ManagedPolicy(this, 'AllowChangeRecordSets', {
-      managedPolicyName: 'allow-change-record-sets',
+      managedPolicyName: props.policyName || 'allow-change-record-sets',
       statements: [
         new iam.PolicyStatement({
           effect: iam.Effect.ALLOW,
