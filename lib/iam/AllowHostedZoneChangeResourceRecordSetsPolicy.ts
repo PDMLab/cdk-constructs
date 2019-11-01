@@ -5,14 +5,20 @@ import * as route53 from '@aws-cdk/aws-route53'
 export interface AllowHostedZoneChangeResourceRecordSetsPolicyProps {
   /**
    * The domain name the hosted zone has been setup for.
-   *
+   */
+  domainName: string
+  /**
+   * The name of the policy being created
    */
   policyName?: string
-  domainName: string
 }
 
 export class AllowHostedZoneChangeResourceRecordSetsPolicy extends cdk.Construct {
-    policy: iam.ManagedPolicy
+  policy: iam.ManagedPolicy
+
+  /**
+   * Create a policy which allows changing DNS records for a domain in a hosted zone in AWS Route53
+   */
   constructor(
     scope: cdk.Construct,
     id: string,
