@@ -10,6 +10,27 @@
     "test": "jest",
     "release": "standard-version"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PDMLab/cdk-constructs.git"
+  },
+  "keywords": [
+    "aws-cdk",
+    "aws",
+    "typescript",
+    "nodejs",
+    "cdk-constructs",
+    "aws-cdk-constructs",
+    "infrastructure-as-code",
+    "iac",
+    "aws-iam"
+  ],
+  "author": "Alexander Zeitler <alexander.zeitler@pdmlab.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PDMLab/cdk-constructs/issues"
+  },
+  "homepage": "https://github.com/PDMLab/cdk-constructs#readme",
   "devDependencies": {
     "@aws-cdk/assert": "^1.15.0",
     "@commitlint/cli": "^8.2.0",
