@@ -46,6 +46,11 @@ export class AllowHostedZoneChangeResourceRecordSetsPolicy extends cdk.Construct
           effect: iam.Effect.ALLOW,
           resources: [`arn:aws:route53:::${zone.hostedZoneId.substring(1)}`],
           actions: ['route53:GetHostedZone']
+        }),
+        new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          resources: [`arn:aws:route53:::change/*`],
+          actions: ['route53:GetChange']
         })
       ]
     })
