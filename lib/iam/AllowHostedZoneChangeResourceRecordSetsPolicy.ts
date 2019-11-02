@@ -29,12 +29,14 @@ export class AllowHostedZoneChangeResourceRecordSetsPolicy extends cdk.Construct
       domainName: props.domainName
     })
 
+    const plainHostedZoneId = zone.hostedZoneId.substring(1)
+
     this.policy = new iam.ManagedPolicy(this, 'AllowChangeRecordSets', {
       managedPolicyName: props.policyName || 'allow-change-record-sets',
       statements: [
         new iam.PolicyStatement({
           effect: iam.Effect.ALLOW,
-          resources: [`arn:aws:route53:::${zone.hostedZoneId.substring(1)}`],
+          resources: [`arn:aws:route53:::${plainHostedZoneId}`],
           actions: ['route53:ChangeResourceRecordSets']
         }),
         new iam.PolicyStatement({
@@ -44,7 +46,7 @@ export class AllowHostedZoneChangeResourceRecordSetsPolicy extends cdk.Construct
         }),
         new iam.PolicyStatement({
           effect: iam.Effect.ALLOW,
-          resources: [`arn:aws:route53:::${zone.hostedZoneId.substring(1)}`],
+          resources: [`arn:aws:route53:::${plainHostedZoneId}`],
           actions: ['route53:GetHostedZone']
         }),
         new iam.PolicyStatement({
