@@ -18,5 +18,33 @@ test('AllowHostedZoneChangeResourceRecordSetsPolicy created', () => {
     domainName: 'mydomain.com'
   })
   // THEN
-  expectCDK(stack).to(haveResource('AWS::IAM::ManagedPolicy'))
+  expectCDK(stack).to(
+    haveResource('AWS::IAM::ManagedPolicy', {
+      PolicyDocument: {
+        Statement: [
+          {
+            Action: 'route53:ChangeResourceRecordSets',
+            Effect: 'Allow',
+            Resource: 'arn:aws:route53:::hostedzone/DUMMY'
+          },
+          {
+            Action: 'route53:ListHostedZonesByName',
+            Effect: 'Allow',
+            Resource: '*'
+          },
+          {
+            Action: 'route53:GetHostedZone',
+            Effect: 'Allow',
+            Resource: 'arn:aws:route53:::hostedzone/DUMMY'
+          },
+          {
+            Action: 'route53:GetChange',
+            Effect: 'Allow',
+            Resource: 'arn:aws:route53:::change/*'
+          }
+        ],
+        Version: '2012-10-17'
+      }
+    })
+  )
 })
